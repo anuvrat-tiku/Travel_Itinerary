@@ -1,0 +1,14 @@
+ng-pristine{
+    border-color: red;
+}
+
+ng-dirty {
+    border-color: green;
+}
+
+div.col-md-6 {
+    border: 1px solid rgba(99, 99, 99, 0.69);
+    text-align: center;
+}
+
+div.

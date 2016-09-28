@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TravelI" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <style>
+        body
+        {
+            background: url(images/MapWorld_gray11.png);
+            background-size: cover;
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/mycss.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <script src="angular.js"></script>
+    <script src="js/app.js"></script>
+    <meta charset="UTF-8">
+    <title>Welcome to Dream Travel</title>
+    <script>
+        var x = 0;
+        var FromArray = [];
+        var ToArray = [];
+        function arrAppend() {
+            var test1 = FromArray[x] = document.getElementById('from').value;
+            var test2 = document.getElementById('to').value;
+            if (test1 === test2) {
+                document.getElementById("fail").innerHTML = "Error! Source CANNOT be the same as Destination.";
+            }
+
+            else {
+                FromArray[x] = document.getElementById('from').value;
+                ToArray[x] = document.getElementById('to').value;
+                alert("Plan #" + x + " - New travel plan : " + FromArray[x] + "->" + ToArray[x] + " created ");
+                x++;
+                document.getElementById('from').value = null;
+                document.getElementById('to').value = null;
+                document.getElementById("fail").innerHTML = "";
+
+                display_arr()
+            }
+        }
+        function display_arr() {
+            var fromL = "";
+            var toL = "";
+            for (var z = 0; z < FromArray.length ; z++) {
+                fromL +=  FromArray[z] + "<br />";
+            }
+            document.getElementById("f").innerHTML = fromL;
+
+            for (var z = 0; z < ToArray.length ; z++) {
+                toL += ToArray[z] + "<br />";
+            }
+            document.getElementById("t").innerHTML = toL;
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="page-header">
+    <span class="row">
+    <h1><small>
+        DreamTravel <img src="glyphicons_free/glyphicons_free/glyphicons/png/glyphicons-39-plane.png" />
+    </small></h1><hr />
+        </span>
+    </div>
+    <div class="container" ng-controller="RouteController">
+        <form name="AddRouting" novalidate>
+
+            From : {{RouteController.product.source}}
+            <select id="from" name="from" ng-model="RouteController.product.source" class="form-control input-group-lg">
+                <option value="Florence, Italy">Florence, Italy</option>
+                <option value="Prague, Czech Republic">Prague, Czech Republic</option>
+                <option value="Tel Aviv, Israel">Tel Aviv, Israel</option>
+                <option value="Oslo, Norway">Oslo, Norway</option>
+                <option value="Antwerp, Belgium">Antwerp, Belgium</option>
+                <option value="Salzburg, Austria">Salzburg, Austria</option>
+                <option value="Munich, Deutschland">Munich, Deutschland</option>
+                <option value="Tokyo, Japan">Tokyo, Japan</option>
+                <option value="Kashmir, India">Kashmir, India</option>
+                <option value="Auckland, New Zealand">Auckland, New Zealand</option>
+            </select>
+            <br />
+            To : {{RouteController.product.destination}}
+            <select id="to" name="to" ng-model="RouteController.product.destination" class="form-control input-group-lg" >
+                <option value="Florence, Italy">Florence, Italy</option>
+                <option value="Prague, Czech Republic">Prague, Czech Republic</option>
+                <option value="Tel Aviv, Israel">Tel Aviv, Israel</option>
+                <option value="Oslo, Norway">Oslo, Norway</option>
+                <option value="Antwerp, Belgium">Antwerp, Belgium</option>
+                <option value="Salzburg, Austria">Salzburg, Austria</option>
+                <option value="Munich, Deutschland">Munich, Deutschland</option>
+                <option value="Tokyo, Japan">Tokyo, Japan</option>
+                <option value="Kashmir, India">Kashmir, India</option>
+                <option value="Auckland, New Zealand">Auckland, New Zealand</option>
+            </select>
+            <br />
+            <center><input type="button" onclick="arrAppend()" ng-disabled="(AddRouting.from.$pristine || AddRouting.to.$pristine)" value="Add To Trips" /></center>
+            <hr />
+        </form>
+        <p style="text-align: center">Your trips</p>
+        <p id="fail" style="color: red; "></p>
+        <div class="modal-body row">
+            <div class="col-md-6">SOURCE</div>
+            <div class="col-md-6">DESTINATION</div>
+            <div class="col-md-6" id="f" style="text-align: center;">
+
+            </div>
+            <div class="col-md-6" id="t" style="text-align: center">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
